@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
-@SuppressLint("SetTextI18n") // Not important during testing
+@SuppressLint("SetTextI18n") // Not relevant to testing
 public class TestLauncher extends AppCompatActivity {
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
