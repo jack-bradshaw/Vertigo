@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -12,8 +13,12 @@ import android.widget.TextView;
 import com.matthewtamlin.android_utilities.library.testing.ControlsOverViewTestHarness;
 import com.matthewtamlin.vertigo.library.SimpleVertigoCoordinator;
 import com.matthewtamlin.vertigo.library.VertigoFrameLayout;
+import com.matthewtamlin.vertigo.library.VertigoView;
+import com.matthewtamlin.vertigo.library.VertigoView.State;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
+import static com.matthewtamlin.vertigo.library.VertigoView.State.ACTIVE;
+import static com.matthewtamlin.vertigo.library.VertigoView.State.INACTIVE;
 
 @SuppressLint("SetTextI18n") // Not relevant to testing
 public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHarness<SimpleVertigoCoordinator> {
@@ -35,13 +40,6 @@ public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHar
 	protected void onCreate(final @Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		subview1 = createSubview("View 1");
-		subview2 = createSubview("View 2");
-		subview3 = createSubview("View 3");
-		subview1.setBackgroundColor(Color.RED);
-		subview2.setBackgroundColor(Color.GRAY);
-		subview3.setBackgroundColor(Color.BLUE);
-
 		getControlsContainer().addView(createRegisterView1Button());
 		getControlsContainer().addView(createRegisterView2Button());
 		getControlsContainer().addView(createRegisterView3Button());
@@ -61,6 +59,12 @@ public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHar
 		if (testView == null) {
 			testView = new SimpleVertigoCoordinator(this);
 
+			subview1 = createSubview(INACTIVE);
+			subview2 = createSubview(INACTIVE);
+			subview3 = createSubview(ACTIVE);
+			subview1.setBackgroundColor(Color.GREEN);
+			subview2.setBackgroundColor(Color.YELLOW);
+			subview3.setBackgroundColor(Color.RED);
 			testView.addView(subview1);
 			testView.addView(subview2);
 			testView.addView(subview3);
@@ -249,14 +253,10 @@ public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHar
 		return b;
 	}
 
-	private VertigoFrameLayout createSubview(final String text) {
+	private VertigoFrameLayout createSubview(final State state) {
 		final VertigoFrameLayout subview = new VertigoFrameLayout(this);
 		subview.setLayoutParams(new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
-
-		final TextView textView = new TextView(this);
-		textView.setText(text);
-
-		subview.addView(textView);
+		subview.onStateChanged(state);
 
 		return subview;
 	}
