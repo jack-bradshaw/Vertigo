@@ -129,7 +129,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 	}
 
 	@Override
-	public void addVertigoView(final VertigoView view, final String key) {
+	public void registerViewForCoordination(final VertigoView view, final String key) {
 		checkNotNull(view, "view cannot be null.");
 		checkNotNull(key, "key cannot be null.");
 
@@ -140,18 +140,16 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 			throw new IllegalArgumentException("The supplied view is not a subclass of android" +
 					".view.View");
 		} else {
-			addView((View) view);
 			allViews.put(key, view);
 			viewsInUpPosition.add(view);
 		}
 	}
 
 	@Override
-	public void removeVertigoView(final String key) {
+	public void unregisterViewForCoordination(final String key) {
 		checkNotNull(key, "key cannot be null.");
 
 		if (allViews.keySet().contains(key)) {
-			removeView((View) allViews.get(key));
 			viewsInUpPosition.remove(allViews.get(key));
 			allViews.remove(key);
 		}
