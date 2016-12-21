@@ -27,10 +27,10 @@ import static com.matthewtamlin.vertigo.library.VertigoView.State.ACTIVE;
 import static com.matthewtamlin.vertigo.library.VertigoView.State.INACTIVE;
 
 /**
- * An implementation of the VertigoViewCoordinator interface based on a FrameLayout.
+ * An implementation of the VertigoCoordinator interface based on a FrameLayout.
  */
 @Tested(testMethod = "manual, automated", requiresInstrumentation = true)
-public class SimpleVertigoCoordinator extends FrameLayout implements VertigoViewCoordinator {
+public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoordinator {
 	/**
 	 * The set of all views which are coordinated by this SlidingCoordinator.
 	 */
@@ -200,7 +200,7 @@ public class SimpleVertigoCoordinator extends FrameLayout implements VertigoView
 	private ActiveViewChangedListener getDefaultListener() {
 		return new ActiveViewChangedListener() {
 			@Override
-			public void onActiveViewChanged(final VertigoViewCoordinator coordinator,
+			public void onActiveViewChanged(final VertigoCoordinator coordinator,
 					final VertigoView activeView) {
 				// Do nothing
 			}

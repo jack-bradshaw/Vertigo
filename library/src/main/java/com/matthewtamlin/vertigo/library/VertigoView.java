@@ -1,7 +1,7 @@
 package com.matthewtamlin.vertigo.library;
 
 /**
- * A view which can be coordinated by a VertigoViewCoordinator. Each VertigoView can have one of two
+ * A view which can be coordinated by a VertigoCoordinator. Each VertigoView can have one of two
  * states: active and inactive. In the active state, the view is being displayed to the user and
  * should be available for interaction. In the inactive state, the view is not visible to the user
  * and should not be available for interaction. The view is notified of state changes by the

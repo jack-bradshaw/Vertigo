@@ -10,7 +10,7 @@ import java.util.Set;
  * change the active view, {@link #makeViewActive(String, boolean, ActiveViewChangedListener)} can
  * be called.
  */
-public interface VertigoViewCoordinator {
+public interface VertigoCoordinator {
 	/**
 	 * Registers a view for coordination. The view must already be contained in the coordinator and
 	 * it must be in the up position. Its state must be inactive unless it is the front most view in
@@ -93,6 +93,6 @@ public interface VertigoViewCoordinator {
 		 * @param activeView
 		 * 		the view which was made active, not null
 		 */
-		public void onActiveViewChanged(VertigoViewCoordinator coordinator, VertigoView activeView);
+		public void onActiveViewChanged(VertigoCoordinator coordinator, VertigoView activeView);
 	}
 }

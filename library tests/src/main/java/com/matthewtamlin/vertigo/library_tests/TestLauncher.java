@@ -26,7 +26,7 @@ public class TestLauncher extends AppCompatActivity {
 
 	private Button createLaunchVertigoViewCoordinatorTestHarnessButton() {
 		final Button b = new Button(this);
-		b.setText("Launch VertigoViewCoordinator test harness");
+		b.setText("Launch VertigoCoordinator test harness");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
