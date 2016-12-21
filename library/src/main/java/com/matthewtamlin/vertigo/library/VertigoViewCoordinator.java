@@ -3,31 +3,35 @@ package com.matthewtamlin.vertigo.library;
 import java.util.Set;
 
 /**
- * Coordinates multiple VertigoViews by sliding them up and down. Views may exist in the up position
- * (centred in the coordinator) or the down position (below the lower bound of the coordinator).
- * Multiple views may exist in the up position simultaneously, but only one will be in front of the
- * others. This view is declared active, and all others are considered inactive. To change the
- * active view, {@link #makeViewActive(String, boolean, ActiveViewChangedListener)} can be called.
+ * Contains and coordinates multiple VertigoViews by sliding them up and down. Views may exist in
+ * the up position (centred in the coordinator) or the down position (below the lower bound of the
+ * coordinator). Multiple views may exist in the up position simultaneously, but only one will be in
+ * front of the others. This view is declared active, and all others are considered inactive. To
+ * change the active view, {@link #makeViewActive(String, boolean, ActiveViewChangedListener)} can
+ * be called.
  */
 public interface VertigoViewCoordinator {
 	/**
-	 * Adds a vertigo view to this coordinator. The view should not be contained in the view
-	 * already.
+	 * Registers a view for coordination. The view must already be contained in the coordinator and
+	 * it must be in the up position. Its state must be inactive unless it is the front most view in
+	 * the coordinator.
 	 *
 	 * @param view
-	 * 		the view to add, not null
+	 * 		the view to register, not null
 	 * @param key
 	 * 		a String key which uniquely identifies the view, not null
 	 */
-	public void addVertigoView(VertigoView view, String key);
+	public void registerViewForCoordination(VertigoView view, String key);
 
 	/**
-	 * Removes the view mapped to the supplied view from this coordinator.
+	 * Unregisters a view from coordination. The view will not be removed from the coordination,
+	 * however it will no longer be modified by calls to {@link #makeViewActive(String, boolean,
+	 * ActiveViewChangedListener)}.
 	 *
 	 * @param key
 	 * 		the key for the view to remove
 	 */
-	public void removeVertigoView(String key);
+	public void unregisterViewForCoordination(String key);
 
 	/**
 	 * Returns the view which is mapped to the supplied key. If no view exists for the supplied key,
