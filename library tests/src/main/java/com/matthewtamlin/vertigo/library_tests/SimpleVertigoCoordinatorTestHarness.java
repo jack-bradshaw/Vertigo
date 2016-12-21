@@ -40,6 +40,7 @@ public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHar
 	protected void onCreate(final @Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		getControlsContainer().addView(createAddViewsButton());
 		getControlsContainer().addView(createRegisterView1Button());
 		getControlsContainer().addView(createRegisterView2Button());
 		getControlsContainer().addView(createRegisterView3Button());
@@ -58,19 +59,32 @@ public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHar
 	public SimpleVertigoCoordinator getTestView() {
 		if (testView == null) {
 			testView = new SimpleVertigoCoordinator(this);
-
-			subview1 = createSubview(INACTIVE);
-			subview2 = createSubview(INACTIVE);
-			subview3 = createSubview(ACTIVE);
-			subview1.setBackgroundColor(Color.GREEN);
-			subview2.setBackgroundColor(Color.YELLOW);
-			subview3.setBackgroundColor(Color.RED);
-			testView.addView(subview1);
-			testView.addView(subview2);
-			testView.addView(subview3);
 		}
 
 		return testView;
+	}
+
+	private Button createAddViewsButton() {
+		final Button b = new Button(this);
+		b.setText("Add views");
+		b.setAllCaps(false);
+
+		b.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(final View v) {
+				subview1 = createSubview(INACTIVE);
+				subview2 = createSubview(INACTIVE);
+				subview3 = createSubview(ACTIVE);
+				subview1.setBackgroundColor(Color.GREEN);
+				subview2.setBackgroundColor(Color.YELLOW);
+				subview3.setBackgroundColor(Color.RED);
+				testView.addView(subview1);
+				testView.addView(subview2);
+				testView.addView(subview3);
+			}
+		});
+
+		return b;
 	}
 
 	private Button createRegisterView1Button() {
