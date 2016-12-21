@@ -30,7 +30,7 @@ import static com.matthewtamlin.vertigo.library.VertigoView.State.INACTIVE;
  * An implementation of the VertigoViewCoordinator interface based on a FrameLayout.
  */
 @Tested(testMethod = "manual, automated", requiresInstrumentation = true)
-public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoViewCoordinator {
+public class SimpleVertigoCoordinator extends FrameLayout implements VertigoViewCoordinator {
 	/**
 	 * The set of all views which are coordinated by this SlidingCoordinator.
 	 */
@@ -58,7 +58,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 	 * @param context
 	 * 		the context the view is operating in
 	 */
-	public FrameVertigoViewCoordinator(final Context context) {
+	public SimpleVertigoCoordinator(final Context context) {
 		super(context);
 	}
 
@@ -70,7 +70,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 	 * @param attrs
 	 * 		configuration attributes, null allowed
 	 */
-	public FrameVertigoViewCoordinator(final Context context, final AttributeSet attrs) {
+	public SimpleVertigoCoordinator(final Context context, final AttributeSet attrs) {
 		super(context, attrs);
 	}
 
@@ -84,7 +84,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 	 * @param defStyleAttr
 	 * 		an attribute in the current theme which supplies default attributes, pass 0	to ignore
 	 */
-	public FrameVertigoViewCoordinator(final Context context, final AttributeSet attrs, final int
+	public SimpleVertigoCoordinator(final Context context, final AttributeSet attrs, final int
 			defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 	}
@@ -104,7 +104,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 	 */
 	@RequiresApi(21) // For caller
 	@TargetApi(21) // For lint
-	public FrameVertigoViewCoordinator(final Context context, final AttributeSet attrs, final int
+	public SimpleVertigoCoordinator(final Context context, final AttributeSet attrs, final int
 			defStyleAttr, final int defStyleRes) {
 		super(context, attrs, defStyleAttr, defStyleRes);
 	}
@@ -286,7 +286,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 					viewToMoveUp.onStateChanged(ACTIVE);
 					viewsInUpPosition.add(viewToMoveUp);
 					currentAnimationCount.decrementAndGet();
-					listener.onActiveViewChanged(FrameVertigoViewCoordinator.this, viewToMoveUp);
+					listener.onActiveViewChanged(SimpleVertigoCoordinator.this, viewToMoveUp);
 					notifyOtherViewsOnInactive(viewToMoveUp);
 				}
 			});
@@ -297,7 +297,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 			moveViewUpWithoutAnimating(viewToMoveUp);
 			viewToMoveUp.onStateChanged(ACTIVE);
 			viewsInUpPosition.add(viewToMoveUp);
-			listener.onActiveViewChanged(FrameVertigoViewCoordinator.this, viewToMoveUp);
+			listener.onActiveViewChanged(SimpleVertigoCoordinator.this, viewToMoveUp);
 			notifyOtherViewsOnInactive(viewToMoveUp);
 		}
 	}
@@ -441,7 +441,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 		public void notifyMakeViewInactiveComplete() {
 			if (notificationCount.incrementAndGet() == triggerCount && listener != null) {
 				activeView.onStateChanged(ACTIVE);
-				listener.onActiveViewChanged(FrameVertigoViewCoordinator.this, activeView);
+				listener.onActiveViewChanged(SimpleVertigoCoordinator.this, activeView);
 			}
 		}
 	}
