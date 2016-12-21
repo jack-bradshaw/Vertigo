@@ -53,7 +53,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 	private int animationDurationMs = 300;
 
 	/**
-	 * Constructs aa new SlidingCoordinator.
+	 * Constructs a new SlidingCoordinator.
 	 *
 	 * @param context
 	 * 		the context the view is operating in
@@ -63,7 +63,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 	}
 
 	/**
-	 * Constructs aa new SlidingCoordinator.
+	 * Constructs a new SlidingCoordinator.
 	 *
 	 * @param context
 	 * 		the context the view is operating in
@@ -75,7 +75,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 	}
 
 	/**
-	 * Constructs aa new SlidingCoordinator.
+	 * Constructs a new SlidingCoordinator.
 	 *
 	 * @param context
 	 * 		the context the view is operating in
@@ -90,7 +90,7 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 	}
 
 	/**
-	 * Constructs aa new SlidingCoordinator.
+	 * Constructs a new SlidingCoordinator.
 	 *
 	 * @param context
 	 * 		the context the view is operating in
