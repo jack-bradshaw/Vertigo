@@ -11,8 +11,8 @@ import java.util.Set;
  */
 public interface VertigoViewCoordinator {
 	/**
-	 * Adds a vertigo view to this coordinator. The supplied view must be in the up position,
-	 * however it may be behind another view.
+	 * Adds a vertigo view to this coordinator. The view should not be contained in the view
+	 * already.
 	 *
 	 * @param view
 	 * 		the view to add, not null
@@ -22,11 +22,19 @@ public interface VertigoViewCoordinator {
 	public void addVertigoView(VertigoView view, String key);
 
 	/**
+	 * Removes the view mapped to the supplied view from this coordinator.
+	 *
+	 * @param key
+	 * 		the key for the view to remove
+	 */
+	public void removeVertigoView(String key);
+
+	/**
 	 * Returns the view which is mapped to the supplied key. If no view exists for the supplied key,
 	 * null is returned.
 	 *
 	 * @param key
-	 * 		the key to get the view for
+	 * 		the key for the view to get
 	 * @return the view mapped to the supplied key, may be null
 	 */
 	public VertigoView getView(String key);
