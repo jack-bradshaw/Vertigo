@@ -33,7 +33,7 @@ public class TestLauncher extends AppCompatActivity {
 			@Override
 			public void onClick(final View v) {
 				startActivity(new Intent(TestLauncher.this,
-						FrameVertigoViewCoordinatorTestHarness.class));
+						SimpleVertigoCoordinatorTestHarness.class));
 			}
 		});
 
