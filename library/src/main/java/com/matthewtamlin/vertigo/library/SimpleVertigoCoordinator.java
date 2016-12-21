@@ -158,6 +158,10 @@ public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoor
 	@Override
 	public void makeViewActive(final String key, final boolean animate,
 			final ActiveViewChangedListener listener) {
+		if (!allViews.containsKey(key)) {
+			throw new IllegalArgumentException("The supplied key is not registered to a view.");
+		}
+
 		final VertigoView viewToMakeActive = allViews.get(key);
 
 		// It's simpler to use a stub implementation of the listener than deal with null
