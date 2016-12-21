@@ -136,9 +136,24 @@ public class FrameVertigoViewCoordinator extends FrameLayout implements VertigoV
 		if (allViews.values().contains(view)) {
 			throw new IllegalArgumentException("The supplied view is already registered with a " +
 					"SlidingCoordinator.");
+		} else if (!(view instanceof View)) {
+			throw new IllegalArgumentException("The supplied view is not a subclass of android" +
+					".view.View");
 		} else {
+			addView((View) view);
 			allViews.put(key, view);
 			viewsInUpPosition.add(view);
+		}
+	}
+
+	@Override
+	public void removeVertigoView(final String key) {
+		checkNotNull(key, "key cannot be null.");
+
+		if (allViews.keySet().contains(key)) {
+			removeView((View) allViews.get(key));
+			viewsInUpPosition.remove(allViews.get(key));
+			allViews.remove(key);
 		}
 	}
 
