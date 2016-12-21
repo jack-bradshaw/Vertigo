@@ -28,6 +28,7 @@ import static com.matthewtamlin.vertigo.library_tests.CustomViewActions.makeView
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.only;
@@ -179,11 +180,11 @@ public class TestSimpleVertigoCoordinator {
 		assertThat("subview 2 should be inactive.", subview2.getCurrentState(), is(INACTIVE));
 		assertThat("subview 3 should be active.", subview3.getCurrentState(), is(ACTIVE));
 
-		checkViewIsInDownPosition(subview1);
-		checkViewIsInDownPosition(subview2);
+		checkViewIsInUpPosition(subview1);
+		checkViewIsInUpPosition(subview2);
 		checkViewIsInUpPosition(subview3);
 
-		verify(listener, never()).onActiveViewChanged(testViewDirect, any(VertigoView.class));
+		verify(listener, never()).onActiveViewChanged(eq(testViewDirect), any(VertigoView.class));
 	}
 
 	@Test
@@ -194,11 +195,11 @@ public class TestSimpleVertigoCoordinator {
 		assertThat("subview 2 should be inactive.", subview2.getCurrentState(), is(INACTIVE));
 		assertThat("subview 3 should be active.", subview3.getCurrentState(), is(ACTIVE));
 
-		checkViewIsInDownPosition(subview1);
-		checkViewIsInDownPosition(subview2);
+		checkViewIsInUpPosition(subview1);
+		checkViewIsInUpPosition(subview2);
 		checkViewIsInUpPosition(subview3);
 
-		verify(listener, never()).onActiveViewChanged(testViewDirect, any(VertigoView.class));
+		verify(listener, never()).onActiveViewChanged(eq(testViewDirect), any(VertigoView.class));
 	}
 
 	@Test
