@@ -39,11 +39,11 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
 public class TestSimpleVertigoCoordinator {
-	private static final String SUBVIEW_1_KEY = "subview 1";
+	private static final String BACK_SUBVIEW_KEY = "subview 1";
 
-	private static final String SUBVIEW_2_KEY = "subview 2";
+	private static final String MIDDLE_SUBVIEW_KEY = "subview 2";
 
-	private static final String SUBVIEW_3_KEY = "subview 3";
+	private static final String FRONT_SUBVIEW_KEY = "subview 3";
 
 	/**
 	 * Hosts the view being tested.
@@ -87,14 +87,14 @@ public class TestSimpleVertigoCoordinator {
 		middleSubviewEspresso = viewToViewInteraction(middleSubviewDirect, "3");
 		frontSubviewEspresso = viewToViewInteraction(frontSubviewDirect, "4");
 
-		testViewEspresso.perform(addViewAndRegister(backSubviewDirect, SUBVIEW_1_KEY));
-		testViewEspresso.perform(addViewAndRegister(middleSubviewDirect, SUBVIEW_2_KEY));
-		testViewEspresso.perform(addViewAndRegister(frontSubviewDirect, SUBVIEW_3_KEY));
+		testViewEspresso.perform(addViewAndRegister(backSubviewDirect, BACK_SUBVIEW_KEY));
+		testViewEspresso.perform(addViewAndRegister(middleSubviewDirect, MIDDLE_SUBVIEW_KEY));
+		testViewEspresso.perform(addViewAndRegister(frontSubviewDirect, FRONT_SUBVIEW_KEY));
 	}
 
 	@Test
 	public void testMakeViewActive_viewIsInUpPositionBehindActiveView_usingAnimation() {
-		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, true, listener));
+		testViewEspresso.perform(makeViewActive(MIDDLE_SUBVIEW_KEY, true, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(ACTIVE, "subview 2"));
@@ -109,7 +109,7 @@ public class TestSimpleVertigoCoordinator {
 
 	@Test
 	public void testMakeViewActive_viewIsInUpPositionBehindActiveView_withoutAnimation() {
-		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, false, listener));
+		testViewEspresso.perform(makeViewActive(MIDDLE_SUBVIEW_KEY, false, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(ACTIVE, "subview 2"));
@@ -124,8 +124,8 @@ public class TestSimpleVertigoCoordinator {
 
 	@Test
 	public void testMakeViewActive_viewIsInDownPosition_usingAnimation() {
-		// Slide subview 2 and 3 down
-		testViewEspresso.perform(makeViewActive(SUBVIEW_1_KEY, true, listener));
+		// Setup for actual test, make front and middle slide down
+		testViewEspresso.perform(makeViewActive(BACK_SUBVIEW_KEY, true, listener));
 
 		backSubviewEspresso.check(hasState(ACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(INACTIVE, "subview 2"));
@@ -138,7 +138,7 @@ public class TestSimpleVertigoCoordinator {
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, backSubviewDirect);
 
 		// Make subview 2 slide up
-		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, true, listener));
+		testViewEspresso.perform(makeViewActive(MIDDLE_SUBVIEW_KEY, true, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(ACTIVE, "subview 2"));
@@ -154,7 +154,7 @@ public class TestSimpleVertigoCoordinator {
 	@Test
 	public void testMakeViewActive_viewIsInDownPosition_withoutAnimation() {
 		// Slide subview 2 and 3 down
-		testViewEspresso.perform(makeViewActive(SUBVIEW_1_KEY, false, listener));
+		testViewEspresso.perform(makeViewActive(BACK_SUBVIEW_KEY, false, listener));
 
 		backSubviewEspresso.check(hasState(ACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(INACTIVE, "subview 2"));
@@ -167,7 +167,7 @@ public class TestSimpleVertigoCoordinator {
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, backSubviewDirect);
 
 		// Make subview 2 slide up
-		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, false, listener));
+		testViewEspresso.perform(makeViewActive(MIDDLE_SUBVIEW_KEY, false, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(ACTIVE, "subview 2"));
@@ -182,7 +182,7 @@ public class TestSimpleVertigoCoordinator {
 
 	@Test
 	public void testMakeViewActive_viewIsAlreadyActive_usingAnimation() {
-		testViewEspresso.perform(makeViewActive(SUBVIEW_3_KEY, true, listener));
+		testViewEspresso.perform(makeViewActive(FRONT_SUBVIEW_KEY, true, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(INACTIVE, "subview 2"));
@@ -197,7 +197,7 @@ public class TestSimpleVertigoCoordinator {
 
 	@Test
 	public void testMakeViewActive_viewIsAlreadyActive_withoutAnimation() {
-		testViewEspresso.perform(makeViewActive(SUBVIEW_3_KEY, false, listener));
+		testViewEspresso.perform(makeViewActive(FRONT_SUBVIEW_KEY, false, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(INACTIVE, "subview 2"));
@@ -212,7 +212,7 @@ public class TestSimpleVertigoCoordinator {
 
 	@Test
 	public void testMakeViewActive_multipleTransitions_usingAnimation() {
-		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, true, listener));
+		testViewEspresso.perform(makeViewActive(MIDDLE_SUBVIEW_KEY, true, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(ACTIVE, "subview 2"));
@@ -224,7 +224,7 @@ public class TestSimpleVertigoCoordinator {
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, middleSubviewDirect);
 
-		testViewEspresso.perform(makeViewActive(SUBVIEW_1_KEY, true, listener));
+		testViewEspresso.perform(makeViewActive(BACK_SUBVIEW_KEY, true, listener));
 
 		backSubviewEspresso.check(hasState(ACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(INACTIVE, "subview 2"));
@@ -236,7 +236,7 @@ public class TestSimpleVertigoCoordinator {
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, backSubviewDirect);
 
-		testViewEspresso.perform(makeViewActive(SUBVIEW_3_KEY, true, listener));
+		testViewEspresso.perform(makeViewActive(FRONT_SUBVIEW_KEY, true, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(INACTIVE, "subview 2"));
@@ -251,7 +251,7 @@ public class TestSimpleVertigoCoordinator {
 
 	@Test
 	public void testMakeViewActive_multipleTransitions_withoutAnimation() {
-		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, false, listener));
+		testViewEspresso.perform(makeViewActive(MIDDLE_SUBVIEW_KEY, false, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(ACTIVE, "subview 2"));
@@ -263,7 +263,7 @@ public class TestSimpleVertigoCoordinator {
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, middleSubviewDirect);
 
-		testViewEspresso.perform(makeViewActive(SUBVIEW_1_KEY, false, listener));
+		testViewEspresso.perform(makeViewActive(BACK_SUBVIEW_KEY, false, listener));
 
 		backSubviewEspresso.check(hasState(ACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(INACTIVE, "subview 2"));
@@ -275,7 +275,7 @@ public class TestSimpleVertigoCoordinator {
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, backSubviewDirect);
 
-		testViewEspresso.perform(makeViewActive(SUBVIEW_3_KEY, false, listener));
+		testViewEspresso.perform(makeViewActive(FRONT_SUBVIEW_KEY, false, listener));
 
 		backSubviewEspresso.check(hasState(INACTIVE, "subview 1"));
 		middleSubviewEspresso.check(hasState(INACTIVE, "subview 2"));
