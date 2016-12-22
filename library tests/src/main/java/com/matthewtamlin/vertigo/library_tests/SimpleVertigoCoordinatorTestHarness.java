@@ -23,17 +23,17 @@ public class SimpleVertigoCoordinatorTestHarness
 	/**
 	 * Coordinator key for the first subview.
 	 */
-	private static final String VIEW_1_KEY = "view 1";
+	private static final String SUBVIEW_1_KEY = "view 1";
 
 	/**
 	 * Coordinator key for the second subview.
 	 */
-	private static final String VIEW_2_KEY = "view 2";
+	private static final String SUBVIEW_2_KEY = "view 2";
 
 	/**
 	 * Coordinator key for the third subview.
 	 */
-	private static final String VIEW_3_KEY = "view 3";
+	private static final String SUBVIEW_3_KEY = "view 3";
 
 	/**
 	 * The view under test.
@@ -59,9 +59,9 @@ public class SimpleVertigoCoordinatorTestHarness
 	protected void onCreate(final @Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getControlsContainer().addView(createAddViewsButton());
-		getControlsContainer().addView(createRegisterViewsButton());
-		getControlsContainer().addView(createUnregisterView1Button());
+		getControlsContainer().addView(createAddSubviewsButton());
+		getControlsContainer().addView(createRegisterSubviewsButton());
+		getControlsContainer().addView(createUnregisterSubviewsButton());
 		getControlsContainer().addView(createUnregisterView2Button());
 		getControlsContainer().addView(createUnregisterView3Button());
 		getControlsContainer().addView(createMakeView1ActiveWithAnimationButton());
@@ -126,9 +126,12 @@ public class SimpleVertigoCoordinatorTestHarness
 		return subview3;
 	}
 
-	private Button createAddViewsButton() {
+	/**
+	 * @return a Button which adds the subviews to the test view when clicked
+	 */
+	private Button createAddSubviewsButton() {
 		final Button b = new Button(this);
-		b.setText("Add views");
+		b.setText("Add subviews");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
@@ -144,64 +147,39 @@ public class SimpleVertigoCoordinatorTestHarness
 	}
 
 	/**
-	 * @return a Button which registers subview1, subview2 and subview3
+	 * @return a Button which registers the subviews when clicked
 	 */
-	private Button createRegisterViewsButton() {
+	private Button createRegisterSubviewsButton() {
 		final Button b = new Button(this);
-		b.setText("Add views");
+		b.setText("Register suviews");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				testView.registerViewForCoordination(subview1, VIEW_1_KEY);
-				testView.registerViewForCoordination(subview2, VIEW_2_KEY);
-				testView.registerViewForCoordination(subview3, VIEW_3_KEY);
+				testView.registerViewForCoordination(subview1, SUBVIEW_1_KEY);
+				testView.registerViewForCoordination(subview2, SUBVIEW_2_KEY);
+				testView.registerViewForCoordination(subview3, SUBVIEW_3_KEY);
 			}
 		});
 
 		return b;
 	}
 
-	private Button createUnregisterView1Button() {
+	/**
+	 * @return a Button which unregisters the subviews when clicked
+	 */
+	private Button createUnregisterSubviewsButton() {
 		final Button b = new Button(this);
-		b.setText("Unregister view 1");
+		b.setText("Unregister subviews");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().unregisterViewForCoordination(VIEW_1_KEY);
-			}
-		});
-
-		return b;
-	}
-
-	private Button createUnregisterView2Button() {
-		final Button b = new Button(this);
-		b.setText("Unregister view 2");
-		b.setAllCaps(false);
-
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				getTestView().unregisterViewForCoordination(VIEW_2_KEY);
-			}
-		});
-
-		return b;
-	}
-
-	private Button createUnregisterView3Button() {
-		final Button b = new Button(this);
-		b.setText("Unregister view 3");
-		b.setAllCaps(false);
-
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				getTestView().unregisterViewForCoordination(VIEW_3_KEY);
+				getTestView().unregisterViewForCoordination(SUBVIEW_1_KEY);
+				getTestView().unregisterViewForCoordination(SUBVIEW_2_KEY);
+				getTestView().unregisterViewForCoordination(SUBVIEW_3_KEY);
 			}
 		});
 
@@ -216,7 +194,7 @@ public class SimpleVertigoCoordinatorTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().makeViewActive(VIEW_1_KEY, true, null);
+				getTestView().makeViewActive(SUBVIEW_1_KEY, true, null);
 			}
 		});
 
@@ -231,7 +209,7 @@ public class SimpleVertigoCoordinatorTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().makeViewActive(VIEW_2_KEY, true, null);
+				getTestView().makeViewActive(SUBVIEW_2_KEY, true, null);
 			}
 		});
 
@@ -246,7 +224,7 @@ public class SimpleVertigoCoordinatorTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().makeViewActive(VIEW_3_KEY, true, null);
+				getTestView().makeViewActive(SUBVIEW_3_KEY, true, null);
 			}
 		});
 
@@ -261,7 +239,7 @@ public class SimpleVertigoCoordinatorTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().makeViewActive(VIEW_1_KEY, true, null);
+				getTestView().makeViewActive(SUBVIEW_1_KEY, true, null);
 			}
 		});
 
@@ -276,7 +254,7 @@ public class SimpleVertigoCoordinatorTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().makeViewActive(VIEW_2_KEY, true, null);
+				getTestView().makeViewActive(SUBVIEW_2_KEY, true, null);
 			}
 		});
 
@@ -291,7 +269,7 @@ public class SimpleVertigoCoordinatorTestHarness
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				getTestView().makeViewActive(VIEW_3_KEY, true, null);
+				getTestView().makeViewActive(SUBVIEW_3_KEY, true, null);
 			}
 		});
 
