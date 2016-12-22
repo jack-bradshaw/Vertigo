@@ -188,7 +188,7 @@ public class SimpleVertigoCoordinatorTestHarness
 
 	private Button createMakeView1ActiveWithAnimationButton() {
 		final Button b = new Button(this);
-		b.setText("Make view 1 active (animated)");
+		b.setText("Make subview 1 active (animated)");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
@@ -203,7 +203,7 @@ public class SimpleVertigoCoordinatorTestHarness
 
 	private Button createMakeView2ActiveWithAnimationButton() {
 		final Button b = new Button(this);
-		b.setText("Make view 2 active (animated)");
+		b.setText("Make subview 2 active (animated)");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
@@ -218,7 +218,7 @@ public class SimpleVertigoCoordinatorTestHarness
 
 	private Button createMakeView3ActiveWithAnimationButton() {
 		final Button b = new Button(this);
-		b.setText("Make view 3 active (animated)");
+		b.setText("Make subview 3 active (animated)");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
@@ -233,7 +233,7 @@ public class SimpleVertigoCoordinatorTestHarness
 
 	private Button createMakeView1ActiveWithoutAnimationButton() {
 		final Button b = new Button(this);
-		b.setText("Make view 1 active (not animated)");
+		b.setText("Make subview 1 active (not animated)");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
@@ -248,7 +248,7 @@ public class SimpleVertigoCoordinatorTestHarness
 
 	private Button createMakeView2ActiveWithoutAnimationButton() {
 		final Button b = new Button(this);
-		b.setText("Make view 2 active (not animated)");
+		b.setText("Make subview 2 active (not animated)");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
@@ -263,7 +263,7 @@ public class SimpleVertigoCoordinatorTestHarness
 
 	private Button createMakeView3ActiveWithoutAnimationButton() {
 		final Button b = new Button(this);
-		b.setText("Make view 3 active (not animated)");
+		b.setText("Make subview 3 active (not animated)");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
