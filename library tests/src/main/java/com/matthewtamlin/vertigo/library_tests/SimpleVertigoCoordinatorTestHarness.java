@@ -184,6 +184,9 @@ public class SimpleVertigoCoordinatorTestHarness
 		return b;
 	}
 
+	/**
+	 * @return a Button which makes view 1 active when clicked (using animations)
+	 */
 	private Button createMakeView1ActiveWithAnimationButton() {
 		final Button b = new Button(this);
 		b.setText("Make subview 1 active (animated)");
@@ -199,6 +202,9 @@ public class SimpleVertigoCoordinatorTestHarness
 		return b;
 	}
 
+	/**
+	 * @return a Button which makes view 2 active when clicked (using animations)
+	 */
 	private Button createMakeView2ActiveWithAnimationButton() {
 		final Button b = new Button(this);
 		b.setText("Make subview 2 active (animated)");
@@ -214,6 +220,9 @@ public class SimpleVertigoCoordinatorTestHarness
 		return b;
 	}
 
+	/**
+	 * @return a Button which makes view 3 active when clicked (using animations)
+	 */
 	private Button createMakeView3ActiveWithAnimationButton() {
 		final Button b = new Button(this);
 		b.setText("Make subview 3 active (animated)");
@@ -229,6 +238,9 @@ public class SimpleVertigoCoordinatorTestHarness
 		return b;
 	}
 
+	/**
+	 * @return a Button which makes view 1 active when clicked (without using animations)
+	 */
 	private Button createMakeView1ActiveWithoutAnimationButton() {
 		final Button b = new Button(this);
 		b.setText("Make subview 1 active (not animated)");
@@ -244,6 +256,9 @@ public class SimpleVertigoCoordinatorTestHarness
 		return b;
 	}
 
+	/**
+	 * @return a Button which makes view 2 active when clicked (without using animations)
+	 */
 	private Button createMakeView2ActiveWithoutAnimationButton() {
 		final Button b = new Button(this);
 		b.setText("Make subview 2 active (not animated)");
@@ -259,6 +274,9 @@ public class SimpleVertigoCoordinatorTestHarness
 		return b;
 	}
 
+	/**
+	 * @return a Button which makes view 3 active when clicked (without using animations)
+	 */
 	private Button createMakeView3ActiveWithoutAnimationButton() {
 		final Button b = new Button(this);
 		b.setText("Make subview 3 active (not animated)");
