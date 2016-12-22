@@ -11,6 +11,9 @@ import android.widget.LinearLayout;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
+/**
+ * Entry point for the manual test harnesses.
+ */
 @SuppressLint("SetTextI18n") // Not relevant to testing
 public class TestLauncher extends AppCompatActivity {
 	@Override
@@ -24,6 +27,9 @@ public class TestLauncher extends AppCompatActivity {
 		rootView.addView(createLaunchVertigoViewCoordinatorTestHarnessButton());
 	}
 
+	/**
+	 * @return a Button which launches the VertigoViewCoordinatorTestHarness
+	 */
 	private Button createLaunchVertigoViewCoordinatorTestHarnessButton() {
 		final Button b = new Button(this);
 		b.setText("Launch VertigoCoordinator test harness");
