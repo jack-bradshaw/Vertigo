@@ -62,8 +62,6 @@ public class SimpleVertigoCoordinatorTestHarness
 		getControlsContainer().addView(createAddSubviewsButton());
 		getControlsContainer().addView(createRegisterSubviewsButton());
 		getControlsContainer().addView(createUnregisterSubviewsButton());
-		getControlsContainer().addView(createUnregisterView2Button());
-		getControlsContainer().addView(createUnregisterView3Button());
 		getControlsContainer().addView(createMakeView1ActiveWithAnimationButton());
 		getControlsContainer().addView(createMakeView2ActiveWithAnimationButton());
 		getControlsContainer().addView(createMakeView3ActiveWithAnimationButton());
