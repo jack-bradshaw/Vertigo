@@ -10,6 +10,12 @@ import android.widget.AdapterView;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 import static com.matthewtamlin.vertigo.library.VertigoView.State.ACTIVE;
 
+/**
+ * An AdapterView which implements the VertigoView interface.
+ *
+ * @param <T>
+ * 		the type of adapter
+ */
 public abstract class VertigoAdapterView<T extends Adapter> extends AdapterView<T> implements
 		VertigoView {
 	/**
