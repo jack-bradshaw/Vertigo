@@ -227,8 +227,7 @@ public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoor
 			final ActiveViewChangedListener listener) {
 		checkNotNull(viewToKeepUp, "viewToKeepUp cannot be null.");
 
-		// Delivers callback when all necessary views have been moved down, but not if no views
-		// are moved down
+		// Delivers callback when all other views have been moved down (but not if no views move)
 		final Consolidator consolidator = new Consolidator(viewsInUpPosition.size() - 1,
 				listener, viewToKeepUp);
 
