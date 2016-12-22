@@ -12,9 +12,30 @@ import org.hamcrest.Matcher;
 
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
 
+/**
+ * Custom Espresso ViewActions for use in testing.
+ */
 public class CustomViewActions {
+	/**
+	 * The delay needed to ensure async events finish, measured in milliseconds.
+	 */
 	private static final int DELAY_MS = 100;
 
+	/**
+	 * Creates a ViewAction which performs the makeViewActive operation on a
+	 * SimpleVertigoCoordinator. A short delay occurs after the operation completes to allow
+	 * asynchronous events to complete.
+	 *
+	 * The returned ViewAction can only be applied to a SimpleVertigoCoordinator.
+	 *
+	 * @param viewKey
+	 * 		the key of the view to make active
+	 * @param animate
+	 * 		whether or not the change should be animated
+	 * @param listener
+	 * 		the listener to call when the change completes, may be null
+	 * @return the ViewAction
+	 */
 	public static ViewAction makeViewActive(final String viewKey, final boolean animate,
 			final ActiveViewChangedListener listener) {
 		return new ViewAction() {
@@ -43,6 +64,19 @@ public class CustomViewActions {
 		};
 	}
 
+	/**
+	 * Creates a ViewAction which adds a VertigoView to a SimpleVertigoViewCoordinator and registers
+	 * the view for coordination. A short delay occurs after the operation completes to allow
+	 * asynchronous events to complete.
+	 *
+	 * The returned ViewAction can only be applied to a SimpleVertigoCoordinator.
+	 *
+	 * @param vertigoView
+	 * 		the view to register, not null
+	 * @param viewKey
+	 * 		the key to associate with the registered view, not null
+	 * @return the ViewAction
+	 */
 	public static ViewAction addViewAndRegister(final VertigoView vertigoView,
 			final String viewKey) {
 		return new ViewAction() {
@@ -53,7 +87,7 @@ public class CustomViewActions {
 
 			@Override
 			public String getDescription() {
-				return "adding and registering view with view key " + viewKey;
+				return "adding and registering view using view key " + viewKey;
 			}
 
 			@Override
