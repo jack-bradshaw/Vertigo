@@ -32,23 +32,23 @@ import static com.matthewtamlin.vertigo.library.VertigoView.State.INACTIVE;
 @Tested(testMethod = "manual, automated", requiresInstrumentation = true)
 public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoordinator {
 	/**
-	 * The set of all views which are coordinated by this SlidingCoordinator.
+	 * All views which are coordinated by this SlidingCoordinator.
 	 */
 	private final Map<String, VertigoView> allViews = new HashMap<>();
 
 	/**
-	 * The set of all views which are currently in the up position.
+	 * All views which are currently in the up position.
 	 */
 	private final Set<VertigoView> viewsInUpPosition = new HashSet<>();
 
 	/**
 	 * The number of animations which are currently being performed on views. An atomic integer is
-	 * needed to ensure concurrent safety when using animations.
+	 * used to ensure concurrent safety when using animations.
 	 */
 	private final AtomicInteger currentAnimationCount = new AtomicInteger(0);
 
 	/**
-	 * The length of time to use for each view move animation.
+	 * The length of time to use for each slide up/down animation.
 	 */
 	private int animationDurationMs = 300;
 
@@ -197,7 +197,7 @@ public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoor
 
 	/**
 	 * Returns an implementation of the ActiveViewChangedListener interface which does nothing when
-	 * its methods are invoked.
+	 * called.
 	 *
 	 * @return the ActiveViewChangedListener
 	 */
@@ -212,7 +212,8 @@ public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoor
 	}
 
 	/**
-	 * Moves all views down, except for the supplied view and any views which are already down.
+	 * Moves all views down, except for the supplied view and any views which are currently in the
+	 * down position.
 	 *
 	 * @param viewToKeepUp
 	 * 		a view in the up position which should not be moved down with the other views, not null
