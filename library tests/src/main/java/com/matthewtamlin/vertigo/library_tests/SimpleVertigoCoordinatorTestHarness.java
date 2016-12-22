@@ -149,7 +149,7 @@ public class SimpleVertigoCoordinatorTestHarness
 	 */
 	private Button createRegisterSubviewsButton() {
 		final Button b = new Button(this);
-		b.setText("Register suviews");
+		b.setText("Register subviews");
 		b.setAllCaps(false);
 
 		b.setOnClickListener(new View.OnClickListener() {
