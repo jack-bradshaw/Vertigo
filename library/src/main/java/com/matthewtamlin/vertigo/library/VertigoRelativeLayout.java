@@ -9,6 +9,9 @@ import android.widget.RelativeLayout;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 import static com.matthewtamlin.vertigo.library.VertigoView.State.ACTIVE;
 
+/**
+ * A RelativeLayout which implements the VertigoView interface.
+ */
 public class VertigoRelativeLayout extends RelativeLayout implements VertigoView {
 	/**
 	 * The current Vertigo state of this view.
