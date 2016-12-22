@@ -295,18 +295,4 @@ public class TestSimpleVertigoCoordinator {
 
 		return subview;
 	}
-
-	private void checkViewIsInUpPosition(final VertigoView view) {
-		final View viewCast = (View) view;
-		final float expectedY = testViewDirect.getY();
-
-		assertThat("view has wrong y position.", viewCast.getY(), CoreMatchers.is(expectedY));
-	}
-
-	private void checkViewIsInDownPosition(final VertigoView view) {
-		final View viewCast = (View) view;
-		final float expectedY = testViewDirect.getY() + viewCast.getHeight();
-
-		assertThat("view has wrong y position.", viewCast.getY(), CoreMatchers.is(expectedY));
-	}
 }
