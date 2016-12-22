@@ -5,8 +5,17 @@
     <application
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
-        android:label="Vertify tests"
+        android:label="Vertigo tests"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+
+        <activity android:name=".TestLauncher">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".SimpleVertigoCoordinatorTestHarness"/>
     </application>
 </manifest>
