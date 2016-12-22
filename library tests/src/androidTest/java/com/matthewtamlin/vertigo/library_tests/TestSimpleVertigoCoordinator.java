@@ -88,10 +88,6 @@ public class TestSimpleVertigoCoordinator {
 		subview2Espresso = viewToViewInteraction(subview2Direct, "3");
 		subview3Espresso = viewToViewInteraction(subview3Direct, "4");
 
-		subview1Direct.setBackgroundColor(Color.GREEN);
-		subview2Direct.setBackgroundColor(Color.YELLOW);
-		subview3Direct.setBackgroundColor(Color.RED);
-
 		testViewEspresso.perform(addViewAndRegister(subview1Direct, SUBVIEW_1_KEY));
 		testViewEspresso.perform(addViewAndRegister(subview2Direct, SUBVIEW_2_KEY));
 		testViewEspresso.perform(addViewAndRegister(subview3Direct, SUBVIEW_3_KEY));
