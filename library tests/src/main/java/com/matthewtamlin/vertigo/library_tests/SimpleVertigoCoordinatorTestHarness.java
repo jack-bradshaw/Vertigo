@@ -5,45 +5,63 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.matthewtamlin.android_utilities.library.testing.ControlsOverViewTestHarness;
 import com.matthewtamlin.vertigo.library.SimpleVertigoCoordinator;
 import com.matthewtamlin.vertigo.library.VertigoFrameLayout;
-import com.matthewtamlin.vertigo.library.VertigoView;
 import com.matthewtamlin.vertigo.library.VertigoView.State;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static com.matthewtamlin.vertigo.library.VertigoView.State.ACTIVE;
 import static com.matthewtamlin.vertigo.library.VertigoView.State.INACTIVE;
 
+/**
+ * Test harness for the SimpleVertigoCoordinator.
+ */
 @SuppressLint("SetTextI18n") // Not relevant to testing
 public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHarness<SimpleVertigoCoordinator> {
+	/**
+	 * Coordinator key for the first subview.
+	 */
 	private static final String VIEW_1_KEY = "view 1";
 
+	/**
+	 * Coordinator key for the second subview.
+	 */
 	private static final String VIEW_2_KEY = "view 2";
 
+	/**
+	 * Coordinator key for the third subview.
+	 */
 	private static final String VIEW_3_KEY = "view 3";
 
+	/**
+	 * The view under test.
+	 */
 	private SimpleVertigoCoordinator testView;
 
+	/**
+	 * The first view in the coordinator.
+	 */
 	private VertigoFrameLayout subview1;
 
+	/**
+	 * The second view in the coordinator.
+	 */
 	private VertigoFrameLayout subview2;
 
+	/**
+	 * The third view in the coordinator.
+	 */
 	private VertigoFrameLayout subview3;
 
 	@Override
 	protected void onCreate(final @Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		getControlsContainer().addView(createAddViewsButton());
-		getControlsContainer().addView(createRegisterView1Button());
-		getControlsContainer().addView(createRegisterView2Button());
-		getControlsContainer().addView(createRegisterView3Button());
+		getControlsContainer().addView(createRegisterViewsButton());
 		getControlsContainer().addView(createUnregisterView1Button());
 		getControlsContainer().addView(createUnregisterView2Button());
 		getControlsContainer().addView(createUnregisterView3Button());
@@ -59,12 +77,45 @@ public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHar
 	public SimpleVertigoCoordinator getTestView() {
 		if (testView == null) {
 			testView = new SimpleVertigoCoordinator(this);
+			testView.addView(getSubview1());
+			testView.addView(getSubview2());
+			testView.addView(getSubview3());
 		}
 
 		return testView;
 	}
 
-	private Button createAddViewsButton() {
+	private VertigoFrameLayout getSubview1() {
+		if (subview1 == null) {
+			subview1 = new VertigoFrameLayout(this);
+			subview1.setBackgroundColor(Color.GREEN);
+			subview1.onStateChanged(INACTIVE);
+		}
+
+		return subview1;
+	}
+
+	private VertigoFrameLayout getSubview2() {
+		if (subview2 == null) {
+			subview2 = new VertigoFrameLayout(this);
+			subview2.setBackgroundColor(Color.YELLOW);
+			subview1.onStateChanged(INACTIVE);
+		}
+
+		return subview2;
+	}
+
+	private VertigoFrameLayout getSubview3() {
+		if (subview3 == null) {
+			subview3 = new VertigoFrameLayout(this);
+			subview3.setBackgroundColor(Color.RED);
+			subview1.onStateChanged(ACTIVE);
+		}
+
+		return subview3;
+	}
+
+	private Button createRegisterViewsButton() {
 		final Button b = new Button(this);
 		b.setText("Add views");
 		b.setAllCaps(false);
@@ -72,60 +123,9 @@ public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHar
 		b.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(final View v) {
-				subview1 = createSubview(INACTIVE);
-				subview2 = createSubview(INACTIVE);
-				subview3 = createSubview(ACTIVE);
-				subview1.setBackgroundColor(Color.GREEN);
-				subview2.setBackgroundColor(Color.YELLOW);
-				subview3.setBackgroundColor(Color.RED);
-				testView.addView(subview1);
-				testView.addView(subview2);
-				testView.addView(subview3);
-			}
-		});
-
-		return b;
-	}
-
-	private Button createRegisterView1Button() {
-		final Button b = new Button(this);
-		b.setText("Register view 1");
-		b.setAllCaps(false);
-
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				getTestView().registerViewForCoordination(subview1, VIEW_1_KEY);
-			}
-		});
-
-		return b;
-	}
-
-	private Button createRegisterView2Button() {
-		final Button b = new Button(this);
-		b.setText("Register view 2");
-		b.setAllCaps(false);
-
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				getTestView().registerViewForCoordination(subview2, VIEW_2_KEY);
-			}
-		});
-
-		return b;
-	}
-
-	private Button createRegisterView3Button() {
-		final Button b = new Button(this);
-		b.setText("Register view 3");
-		b.setAllCaps(false);
-
-		b.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(final View v) {
-				getTestView().registerViewForCoordination(subview3, VIEW_3_KEY);
+				testView.registerViewForCoordination(subview1, VIEW_1_KEY);
+				testView.registerViewForCoordination(subview2, VIEW_2_KEY);
+				testView.registerViewForCoordination(subview3, VIEW_3_KEY);
 			}
 		});
 
@@ -265,13 +265,5 @@ public class SimpleVertigoCoordinatorTestHarness extends ControlsOverViewTestHar
 		});
 
 		return b;
-	}
-
-	private VertigoFrameLayout createSubview(final State state) {
-		final VertigoFrameLayout subview = new VertigoFrameLayout(this);
-		subview.setLayoutParams(new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
-		subview.onStateChanged(state);
-
-		return subview;
 	}
 }
