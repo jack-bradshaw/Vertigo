@@ -26,6 +26,8 @@ import static com.matthewtamlin.vertigo.library.VertigoView.State.INACTIVE;
 import static com.matthewtamlin.vertigo.library_tests.CustomViewActions.addViewAndRegister;
 import static com.matthewtamlin.vertigo.library_tests.CustomViewActions.makeViewActive;
 import static com.matthewtamlin.vertigo.library_tests.CustomViewAssertions.hasState;
+import static com.matthewtamlin.vertigo.library_tests.CustomViewAssertions.isInDownPosition;
+import static com.matthewtamlin.vertigo.library_tests.CustomViewAssertions.isInUpPosition;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Matchers.any;
@@ -103,9 +105,9 @@ public class TestSimpleVertigoCoordinator {
 		subview2Espresso.check(hasState(ACTIVE, "subview 2"));
 		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInDownPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInDownPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, only()).onActiveViewChanged(testViewDirect, subview2Direct);
 	}
@@ -114,13 +116,13 @@ public class TestSimpleVertigoCoordinator {
 	public void testMakeViewActive_viewIsInUpPositionBehindActiveView_withoutAnimation() {
 		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, false, listener));
 
-		assertThat("subview 1 should be inactive.", subview1Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 2 should be active.", subview2Direct.getCurrentState(), is(ACTIVE));
-		assertThat("subview 3 should be inactive.", subview3Direct.getCurrentState(), is(INACTIVE));
+		subview1Espresso.check(hasState(INACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(ACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInDownPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInDownPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, only()).onActiveViewChanged(testViewDirect, subview2Direct);
 	}
@@ -130,26 +132,26 @@ public class TestSimpleVertigoCoordinator {
 		// Slide subview 2 and 3 down
 		testViewEspresso.perform(makeViewActive(SUBVIEW_1_KEY, true, listener));
 
-		assertThat("subview 1 should be active.", subview1Direct.getCurrentState(), is(ACTIVE));
-		assertThat("subview 2 should be inactive.", subview2Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 3 should be inactive.", subview3Direct.getCurrentState(), is(INACTIVE));
+		subview1Espresso.check(hasState(ACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(INACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInDownPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInDownPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview1Direct);
 
 		// Make subview 2 slide up
 		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, true, listener));
 
-		assertThat("subview 1 should be inactive.", subview1Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 2 should be active.", subview2Direct.getCurrentState(), is(ACTIVE));
-		assertThat("subview 3 should be inactive.", subview3Direct.getCurrentState(), is(INACTIVE));
+		subview1Espresso.check(hasState(INACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(ACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview2Direct);
 	}
@@ -159,26 +161,26 @@ public class TestSimpleVertigoCoordinator {
 		// Slide subview 2 and 3 down
 		testViewEspresso.perform(makeViewActive(SUBVIEW_1_KEY, false, listener));
 
-		assertThat("subview 1 should be active.", subview1Direct.getCurrentState(), is(ACTIVE));
-		assertThat("subview 2 should be inactive.", subview2Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 3 should be inactive.", subview3Direct.getCurrentState(), is(INACTIVE));
+		subview1Espresso.check(hasState(ACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(INACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInDownPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInDownPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview1Direct);
 
-		// Make subview slide up
+		// Make subview 2 slide up
 		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, false, listener));
 
-		assertThat("subview 1 should be inactive.", subview1Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 2 should be active.", subview2Direct.getCurrentState(), is(ACTIVE));
-		assertThat("subview 3 should be inactive.", subview3Direct.getCurrentState(), is(INACTIVE));
+		subview1Espresso.check(hasState(INACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(ACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview2Direct);
 	}
@@ -187,13 +189,13 @@ public class TestSimpleVertigoCoordinator {
 	public void testMakeViewActive_viewIsAlreadyActive_usingAnimation() {
 		testViewEspresso.perform(makeViewActive(SUBVIEW_3_KEY, true, listener));
 
-		assertThat("subview 1 should be inactive.", subview1Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 2 should be inactive.", subview2Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 3 should be active.", subview3Direct.getCurrentState(), is(ACTIVE));
+		subview1Espresso.check(hasState(INACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(INACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(ACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInUpPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInUpPosition(testViewDirect));
 
 		verify(listener, never()).onActiveViewChanged(eq(testViewDirect), any(VertigoView.class));
 	}
@@ -202,13 +204,13 @@ public class TestSimpleVertigoCoordinator {
 	public void testMakeViewActive_viewIsAlreadyActive_withoutAnimation() {
 		testViewEspresso.perform(makeViewActive(SUBVIEW_3_KEY, false, listener));
 
-		assertThat("subview 1 should be inactive.", subview1Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 2 should be inactive.", subview2Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 3 should be active.", subview3Direct.getCurrentState(), is(ACTIVE));
+		subview1Espresso.check(hasState(INACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(INACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(ACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInUpPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInUpPosition(testViewDirect));
 
 		verify(listener, never()).onActiveViewChanged(eq(testViewDirect), any(VertigoView.class));
 	}
@@ -217,37 +219,37 @@ public class TestSimpleVertigoCoordinator {
 	public void testMakeViewActive_multipleTransitions_usingAnimation() {
 		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, true, listener));
 
-		assertThat("subview 1 should be inactive.", subview1Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 2 should be active.", subview2Direct.getCurrentState(), is(ACTIVE));
-		assertThat("subview 3 should be inactive.", subview3Direct.getCurrentState(), is(INACTIVE));
+		subview1Espresso.check(hasState(INACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(ACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInDownPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInDownPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview2Direct);
 
 		testViewEspresso.perform(makeViewActive(SUBVIEW_1_KEY, true, listener));
 
-		assertThat("subview 1 should be active.", subview1Direct.getCurrentState(), is(ACTIVE));
-		assertThat("subview 2 should be inactive.", subview2Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 3 should be inactive.", subview3Direct.getCurrentState(), is(INACTIVE));
+		subview1Espresso.check(hasState(ACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(INACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview1Direct);
 
 		testViewEspresso.perform(makeViewActive(SUBVIEW_3_KEY, true, listener));
 
-		assertThat("subview 1 should be inactive.", subview1Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 2 should be inactive.", subview2Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 3 should be active.", subview3Direct.getCurrentState(), is(ACTIVE));
+		subview1Espresso.check(hasState(INACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(INACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(ACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInUpPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInUpPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview3Direct);
 	}
@@ -256,37 +258,37 @@ public class TestSimpleVertigoCoordinator {
 	public void testMakeViewActive_multipleTransitions_withoutAnimation() {
 		testViewEspresso.perform(makeViewActive(SUBVIEW_2_KEY, false, listener));
 
-		assertThat("subview 1 should be inactive.", subview1Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 2 should be active.", subview2Direct.getCurrentState(), is(ACTIVE));
-		assertThat("subview 3 should be inactive.", subview3Direct.getCurrentState(), is(INACTIVE));
+		subview1Espresso.check(hasState(INACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(ACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInDownPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInDownPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview2Direct);
 
 		testViewEspresso.perform(makeViewActive(SUBVIEW_1_KEY, false, listener));
 
-		assertThat("subview 1 should be active.", subview1Direct.getCurrentState(), is(ACTIVE));
-		assertThat("subview 2 should be inactive.", subview2Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 3 should be inactive.", subview3Direct.getCurrentState(), is(INACTIVE));
+		subview1Espresso.check(hasState(ACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(INACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(INACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInDownPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInDownPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview1Direct);
 
 		testViewEspresso.perform(makeViewActive(SUBVIEW_3_KEY, false, listener));
 
-		assertThat("subview 1 should be inactive.", subview1Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 2 should be inactive.", subview2Direct.getCurrentState(), is(INACTIVE));
-		assertThat("subview 3 should be active.", subview3Direct.getCurrentState(), is(ACTIVE));
+		subview1Espresso.check(hasState(INACTIVE, "subview 1"));
+		subview2Espresso.check(hasState(INACTIVE, "subview 2"));
+		subview3Espresso.check(hasState(ACTIVE, "subview 3"));
 
-		checkViewIsInUpPosition(subview1Direct);
-		checkViewIsInUpPosition(subview2Direct);
-		checkViewIsInUpPosition(subview3Direct);
+		subview1Espresso.check(isInUpPosition(testViewDirect));
+		subview2Espresso.check(isInUpPosition(testViewDirect));
+		subview3Espresso.check(isInUpPosition(testViewDirect));
 
 		verify(listener, times(1)).onActiveViewChanged(testViewDirect, subview3Direct);
 	}
