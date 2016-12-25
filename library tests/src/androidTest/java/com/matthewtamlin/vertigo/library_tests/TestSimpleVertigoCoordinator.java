@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static com.matthewtamlin.android_utilities.library.testing.EspressoHelper.viewToViewInteraction;
+import static com.matthewtamlin.android_testing_tools.library.EspressoHelper.viewToViewInteraction;
 import static com.matthewtamlin.java_utilities.checkers.NullChecker.checkNotNull;
 import static com.matthewtamlin.vertigo.library.VertigoView.State.ACTIVE;
 import static com.matthewtamlin.vertigo.library.VertigoView.State.INACTIVE;
