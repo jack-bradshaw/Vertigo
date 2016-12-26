@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 
-import com.matthewtamlin.android_utilities.library.testing.ControlsOverViewTestHarness;
+import com.matthewtamlin.android_testing_tools.library.ControlsOverViewTestHarness;
 import com.matthewtamlin.vertigo.library.SimpleVertigoCoordinator;
 import com.matthewtamlin.vertigo.library.VertigoFrameLayout;
 
@@ -18,8 +18,8 @@ import static com.matthewtamlin.vertigo.library.VertigoView.State.INACTIVE;
  * Test harness for the SimpleVertigoCoordinator.
  */
 @SuppressLint("SetTextI18n") // Not relevant to testing
-public class SimpleVertigoCoordinatorTestHarness
-		extends ControlsOverViewTestHarness<SimpleVertigoCoordinator> {
+public class SimpleVertigoCoordinatorTestHarness extends
+		ControlsOverViewTestHarness<SimpleVertigoCoordinator> {
 	/**
 	 * Coordinator key for the first subview.
 	 */
