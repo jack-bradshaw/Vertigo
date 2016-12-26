@@ -179,8 +179,6 @@ public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoor
 				((View) viewToMakeActive).bringToFront();
 				moveViewUpWithoutMovingOtherViews(viewToMakeActive, animate, listenerToUse);
 			}
-
-			makeOnlyActiveViewInteractive();
 		}
 	}
 
@@ -303,17 +301,6 @@ public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoor
 			viewsInUpPosition.add(viewToMoveUp);
 			listener.onActiveViewChanged(SimpleVertigoCoordinator.this, viewToMoveUp);
 			notifyOtherViewsOnInactive(viewToMoveUp);
-		}
-	}
-
-	/**
-	 * Sets the active view to be clickable and focusable, and sets all other views to be
-	 * unclickable and unfocusable.
-	 */
-	private void makeOnlyActiveViewInteractive() {
-		for (final VertigoView view : allViews.values()) {
-			((View) view).setClickable(view.getCurrentState() == ACTIVE);
-			((View) view).setFocusable(view.getCurrentState() == ACTIVE);
 		}
 	}
 
