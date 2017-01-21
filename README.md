@@ -42,6 +42,9 @@ In step 5 when the `makeViewActive(String)` method is called, one of three scena
 - SimpleVertigoCoordinators cannot be resized after coordination begins.
 - Additional views can be registered with a SimpleViewCoordinator after coordination has begun, so long as the view has the correct state when added.
 
+## License
+This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
+
 ## Dependencies and Attribution
 This library uses the following open source libraries as level 1 dependencies:
 - [Android Support Library](https://developer.android.com/topic/libraries/support-library/index.html), licensed under the Apache 2.0 license.
