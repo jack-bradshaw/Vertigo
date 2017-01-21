@@ -3,6 +3,9 @@ Vertigo is an Android library for creating layouts where the views slide up and 
 
 <div style="text-align:center"><img src="https://raw.githubusercontent.com/MatthewTamlin/Vertigo/master/artwork/example.gif" width="425"/></div>
 
+## Download
+Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:vertigo:1.0.0’` to your gradle build file to use the latest version. Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/Vertigo).
+
 ##Usage 
 The library has two primary components:
 - The `SlidingVertigoCoordinator` class. A FrameLayout subclass which implements the `VertigoCoordinator` interface.
