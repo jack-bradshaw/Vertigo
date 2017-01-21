@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
 	private static final String VIEW_1_KEY = "view 1";
 
 	private static final String VIEW_2_KEY = "view 2";
-	
+
 	private static final String VIEW_3_KEY = "view_3";
 
 	private VertigoCoordinator coordinator;
