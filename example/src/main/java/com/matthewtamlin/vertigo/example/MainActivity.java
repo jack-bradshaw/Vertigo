@@ -31,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
 		final VertigoView view2 = (VertigoView) findViewById(R.id.activity_main_view_2);
 		final VertigoView view3 = (VertigoView) findViewById(R.id.activity_main_view_3);
 
+		view1.onStateChanged(VertigoView.State.INACTIVE);
+		view2.onStateChanged(VertigoView.State.INACTIVE);
+		view3.onStateChanged(VertigoView.State.ACTIVE);
+
 		coordinator.registerViewForCoordination(view1, VIEW_1_KEY);
 		coordinator.registerViewForCoordination(view2, VIEW_2_KEY);
 		coordinator.registerViewForCoordination(view3, VIEW_3_KEY);
