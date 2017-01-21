@@ -1,5 +1,5 @@
 # Vertigo
-Vertigo is an Android library for creating layouts where the views slide up and down over each other. For example:
+Vertigo is an Android library for creating layouts where the views slide vertically. For example:
 
 <div style="text-align:center"><img src="https://raw.githubusercontent.com/MatthewTamlin/Vertigo/master/artwork/example.gif" width="425"/></div>
 
