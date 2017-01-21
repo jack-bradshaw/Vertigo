@@ -57,13 +57,13 @@
 		<com.matthewtamlin.vertigo.library.VertigoFrameLayout
 			android:id="@+id/activity_main_view_1"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
+			android:layout_height="match_parent"
+			android:background="#FF880E4F">
 
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				android:background="#FF880E4F"
 				android:text="View 1"
 				android:textColor="@android:color/white"
 				android:textSize="24sp"/>
@@ -72,13 +72,13 @@
 		<com.matthewtamlin.vertigo.library.VertigoFrameLayout
 			android:id="@+id/activity_main_view_2"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
+			android:layout_height="match_parent"
+			android:background="#FFFF6F00">
 
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				android:background="#FFFF6F00"
 				android:text="View 2"
 				android:textColor="@android:color/white"
 				android:textSize="24sp"/>
@@ -87,13 +87,13 @@
 		<com.matthewtamlin.vertigo.library.VertigoFrameLayout
 			android:id="@+id/activity_main_view_3"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent">
+			android:layout_height="match_parent"
+			android:background="#FF0D47A1">
 
 			<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:layout_gravity="center"
-				android:background="#FF0D47A1"
 				android:text="View 3"
 				android:textColor="@android:color/white"
 				android:textSize="24sp"/>
