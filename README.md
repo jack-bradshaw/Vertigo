@@ -37,11 +37,11 @@ In step 5 when the `makeViewActive(String)` method is called, one of three scena
 - If the the target view is in the down position, it is slid up. A callback is delivered to the target view and the view which was previously displayed.
 
 ##Important notes:
-- Unexpected results can occur if views which don't implement the VertigoView interface are added to the SimpleVertigoCoordinator.
-- The library contains subclasses of the standard layouts (linear, relative, frame etc.) which implement the VerigoView interface.
-- VertigoViews are responsible for remembering their own state, and must reliable return the last state delcared. This means that `VertigoView.getCurrentState()` method must always return the last state declared to `VertigoView.onStateChanged(State)`. If this condition is not satisfied, then the coordinator will not function correctly.
-- The `SimpleVertigoCoordinator` must not change size.
-- New views can be registered with the coordinator after coordination has begun, however the views must be centred in the coordinator when added and their state must be correct. A view can only be active if it is centred in the coordinator (i.e. not slid down) and at the top of the view stack within the coordinator.
+- VertigoViews must match the width and height of the coordinator.
+- Unexpected results can occur if views which don't implement the VertigoView interface are added to a SimpleVertigoCoordinator.
+- VertigoViews are responsible for remembering their own state. Each VertigoView must reliabley return the last state delcared to `onStateChanged(State)` when `getCurrentState()` is called.
+- SimpleVertigoCoordinators cannot be resized after coordination begins.
+- Additional views can be registered with a SimpleViewCoordinator after coordination has begun, so long as the view has the correct state when added.
 
 ##Compatibility
 This library is compatible with Android 12 and up.
