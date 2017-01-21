@@ -7,23 +7,37 @@ Vertigo is an Android library for creating layouts where the views slide up and 
 Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:vertigo:1.0.0’` to your gradle build file to use the latest version. Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/Vertigo).
 
 ##Usage 
-The library has two primary components:
-- The `SlidingVertigoCoordinator` class. A FrameLayout subclass which implements the `VertigoCoordinator` interface.
-- The `VertigoView` interface. Define views which can be used with a VertigoCoordinator. Several implementations are provided.
+There are two key interfaces in this library:
+- `VertigoView` is a View which can be coordinated by a VertigoView.
+- `VertigoCoordinator` contains multiple VertigoViews and coordinates their position.
 
-The library can be used as follows:
-  1. Create a layout containing a SimpleVertigoCoordinator.
-  2. Add multiple VertigoView implementations as children of the coordinator. Do this as you would normally add views to a FrameLayout.
-  3. Register the views with the coordinator by calling the `SimpleVertigoView.registerViewForCoordination(VertigoView, String)` method. For safety, only do this once the layout has been inflated.
-  4. Call the `SimpleVertigoView.makeViewActive(String)` method to change the view being displayed. This will deliver the appropriate callbacks to the VertigoViews.
+The following implementations are provided for the VertigoView interface:
+- `VertigoRelativeLayout` 
+- `VertigoLinearLayout`
+- `VertigoFrameLayout`
+- `VertigoAdapterView`
+
+All four classes can be used in a VertigoCoordinator, but are otherwise identical to their superclasses.
+
+The SimpleVertigoCoordinator is the only provided implementation of the VertigoCoordinator interface. The coordinator can easily be used in any layout, however the bottom of the view should be positioned so that the coordinated views are out of sight when they slid edown. This is important because the views are clipped as they pass the lower boundary of the coordinator, so the sliding effect will not look good if unconcealed.
+
+The easiest way to use the library in your app is as follows:
+  1. Create a layout containing a SimpleVertigoCoordinator.  
+  2. Add multiple VertigoViews as children of the coordinator just as you would add views to any FrameLayout.
+  3. Call the `onStateChanged(State)` method of each view to ensure all views have the right state.
+  4. Register the views with the coordinator by calling the `SimpleVertigoView.registerViewForCoordination(VertigoView, String)` method.
+  5. Call the `SimpleVertigoView.makeViewActive(String)` method when the active view needs to be changed.
   
-When the `makeViewActive(String)` method is called, one of three scenarios will occur:
+  
+Step 3 is important because the state of the VertigoViews (either active or inactive) is used by the coordinator when deciding how to position the views. A view is only active if it is in the up position and in front of all other views in the coordinator.
+
+In step 5 when the `makeViewActive(String)` method is called, one of three scenarios will occur:
 - If the target view is both in the up position and in front of all other views, none of the views change and no callbacks are delivered.
 - If the target view is in the up position and hidden behind another view, all other views in the up position are slid down to reveal the target view. Callbacks are delivered to the target view and the views which were slid down.
 - If the the target view is in the down position, it is slid up. A callback is delivered to the target view and the view which was previously displayed.
 
 ##Important notes:
-- The sliding coordinator can only coordinate views which implement the VertigoView interface, however it still functions as a regular FrameLayout so can hold any view.
+- Unexpected results can occur if views which don't implement the VertigoView interface are added to the SimpleVertigoCoordinator.
 - The library contains subclasses of the standard layouts (linear, relative, frame etc.) which implement the VerigoView interface.
 - VertigoViews are responsible for remembering their own state, and must reliable return the last state delcared. This means that `VertigoView.getCurrentState()` method must always return the last state declared to `VertigoView.onStateChanged(State)`. If this condition is not satisfied, then the coordinator will not function correctly.
 - The `SimpleVertigoCoordinator` must not change size.
