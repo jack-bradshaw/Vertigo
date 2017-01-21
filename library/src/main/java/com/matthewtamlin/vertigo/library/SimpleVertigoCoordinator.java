@@ -429,15 +429,42 @@ public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoor
 		return animator;
 	}
 
+	/**
+	 * Delivers an active changed callback when a particular number of views notify they are
+	 * inactive.
+	 */
 	private class Consolidator {
+		/**
+		 * The number of notifications which must be received to trigger the callback.
+		 */
 		private final int triggerCount;
 
+		/**
+		 * The callback to trigger.
+		 */
 		private final ActiveViewChangedListener listener;
 
+		/**
+		 * The view to pass to the callback
+		 */
 		private final VertigoView activeView;
 
+		/**
+		 * The current number of notifications received.
+		 */
 		private final AtomicInteger notificationCount = new AtomicInteger(0);
 
+		/**
+		 * Constructs a new Consolidator. The provided values cannot be changed after instantiation.
+		 * No notification will ever be delivered if zero is supplied for the triggerCount.
+		 *
+		 * @param triggerCount
+		 * 		the number of notifications to wait for before delivering the callback
+		 * @param listener
+		 * 		the listener to deliver the callback to when triggered
+		 * @param activeView
+		 * 		the view to pass to the callback
+		 */
 		public Consolidator(final int triggerCount, final ActiveViewChangedListener listener,
 				final VertigoView activeView) {
 			this.triggerCount = triggerCount;
@@ -445,6 +472,10 @@ public class SimpleVertigoCoordinator extends FrameLayout implements VertigoCoor
 			this.activeView = activeView;
 		}
 
+		/**
+		 * Notifies this consolidator that a view has become inactive. If the number of
+		 * notifications reaches the trigger count, the callback is delivered.
+		 */
 		public void notifyMakeViewInactiveComplete() {
 			if (notificationCount.incrementAndGet() == triggerCount && listener != null) {
 				activeView.onStateChanged(ACTIVE);
