@@ -28,7 +28,6 @@ The easiest way to use the library in your app is as follows:
   4. Register the views with the coordinator by calling the `SimpleVertigoView.registerViewForCoordination(VertigoView, String)` method.
   5. Call the `SimpleVertigoView.makeViewActive(String)` method when the active view needs to be changed.
   
-  
 Step 3 is important because the state of the VertigoViews (either active or inactive) is used by the coordinator when deciding how to position the views. A view is only active if it is in the up position and in front of all other views in the coordinator.
 
 In step 5 when the `makeViewActive(String)` method is called, one of three scenarios will occur:
