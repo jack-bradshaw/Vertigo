@@ -17,7 +17,7 @@ The following implementations are provided for the VertigoView interface:
 - `VertigoFrameLayout`
 - `VertigoAdapterView`
 
-All four classes can be used in a VertigoCoordinator, but are otherwise identical to their superclasses.
+All four classes can be used in a VertigoCoordinator, but are otherwise identical to their respective superclasses.
 
 The SimpleVertigoCoordinator class is the only provided implementation of the VertigoCoordinator interface. It can easily be used in any layout, however care should be given to the coordinator's bottom position. The coordinated views are clipped as they slide out of the coordinator, which will not look good if the bottom of the coordinator is sitting in free space. To create a layout using the SimpleVertigoCoordinator, follow these steps:
   1. Create a layout containing a SimpleVertigoCoordinator.  
