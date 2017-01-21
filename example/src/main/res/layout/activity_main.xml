@@ -66,7 +66,7 @@
 				android:layout_gravity="center"
 				android:text="View 1"
 				android:textColor="@android:color/white"
-				android:textSize="24sp"/>
+				android:textSize="30sp"/>
 		</com.matthewtamlin.vertigo.library.VertigoFrameLayout>
 
 		<com.matthewtamlin.vertigo.library.VertigoFrameLayout
@@ -81,7 +81,7 @@
 				android:layout_gravity="center"
 				android:text="View 2"
 				android:textColor="@android:color/white"
-				android:textSize="24sp"/>
+				android:textSize="30sp"/>
 		</com.matthewtamlin.vertigo.library.VertigoFrameLayout>
 
 		<com.matthewtamlin.vertigo.library.VertigoFrameLayout
@@ -96,8 +96,7 @@
 				android:layout_gravity="center"
 				android:text="View 3"
 				android:textColor="@android:color/white"
-				android:textSize="24sp"/>
+				android:textSize="30sp"/>
 		</com.matthewtamlin.vertigo.library.VertigoFrameLayout>
-
 	</com.matthewtamlin.vertigo.library.SimpleVertigoCoordinator>
-</LinearLayout>
+</LinearLayout> 
