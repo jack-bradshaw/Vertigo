@@ -1,28 +1,54 @@
-#Vertigo
-Vertigo is an android library for creating layouts where the views slide up and down over each other.
+# Vertigo
+Vertigo is an Android library for creating layouts where the views slide up and down over each other. For example:
 
-##Usage 
-The library has two primary components:
-- The `SlidingVertigoCoordinator` class. A FrameLayout subclass which implements the `VertigoCoordinator` interface.
-- The `VertigoView` interface. Define views which can be used with a VertigoCoordinator. Several implementations are provided.
+<div style="text-align:center"><img src="https://raw.githubusercontent.com/MatthewTamlin/Vertigo/master/artwork/example.gif" width="425"/></div>
 
-The library can be used as follows:
-  1. Create a layout containing a SimpleVertigoCoordinator.
-  2. Add multiple VertigoView implementations as children of the coordinator. Do this as you would normally add views to a FrameLayout.
-  3. Register the views with the coordinator by calling the `SimpleVertigoView.registerViewForCoordination(VertigoView, String)` method. For safety, only do this once the layout has been inflated.
-  4. Call the `SimpleVertigoView.makeViewActive(String)` method to change the view being displayed. This will deliver the appropriate callbacks to the VertigoViews.
+## Download
+Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:vertigo:1.0.0’` to your gradle build file to use the latest version. Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/Vertigo).
+
+## Usage 
+There are two key interfaces in this library:
+- `VertigoView` is a View which can be used in a VertigoCoordinator.
+- `VertigoCoordinator` contains multiple VertigoViews and coordinates their positions.
+
+The following implementations are provided for the VertigoView interface:
+- `VertigoRelativeLayout` 
+- `VertigoLinearLayout`
+- `VertigoFrameLayout`
+- `VertigoAdapterView`
+
+All four classes can be used in a VertigoCoordinator, but are otherwise identical to their superclasses.
+
+The SimpleVertigoCoordinator class is the only provided implementation of the VertigoCoordinator interface. It can easily be used in any layout, however care should be given to the coordinator's bottom position. The coordinated views are clipped as they slide out of the coordinator, which will not look good if the bottom of the coordinator is sitting in free space. To create a layout using the SimpleVertigoCoordinator, follow these steps:
+  1. Create a layout containing a SimpleVertigoCoordinator.  
+  2. Add VertigoViews as children of the coordinator just as you would add views to any FrameLayout.
+  3. Call the `onStateChanged(State)` method of each view to ensure all views have the correct state.
+  4. Register the views with the coordinator by calling the `SimpleVertigoView.registerViewForCoordination(VertigoView, String)` method.
+  5. Call the `SimpleVertigoView.makeViewActive(String)` method to change the active view as desired.
   
-When the `makeViewActive(String)` method is called, one of three scenarios will occur:
+In step 5 when the `makeViewActive(String)` method is called, one of three events will occur:
 - If the target view is both in the up position and in front of all other views, none of the views change and no callbacks are delivered.
 - If the target view is in the up position and hidden behind another view, all other views in the up position are slid down to reveal the target view. Callbacks are delivered to the target view and the views which were slid down.
 - If the the target view is in the down position, it is slid up. A callback is delivered to the target view and the view which was previously displayed.
 
-##Important notes:
-- The sliding coordinator can only coordinate views which implement the VertigoView interface, however it still functions as a regular FrameLayout so can hold any view.
-- The library contains subclasses of the standard layouts (linear, relative, frame etc.) which implement the VerigoView interface.
-- VertigoViews are responsible for remembering their own state, and must reliable return the last state delcared. This means that `VertigoView.getCurrentState()` method must always return the last state declared to `VertigoView.onStateChanged(State)`. If this condition is not satisfied, then the coordinator will not function correctly.
-- The `SimpleVertigoCoordinator` must not change size.
-- New views can be registered with the coordinator after coordination has begun, however the views must be centred in the coordinator when added and their state must be correct. A view can only be active if it is centred in the coordinator (i.e. not slid down) and at the top of the view stack within the coordinator.
+Step 3 is important because the states of the contained views (either active or inactive) are used by the coordinator when deciding which views to move. A view must only be declared active if it is both in the up position and in front of all other views in the coordinator.
 
-##Compatibility
+## Important notes:
+- VertigoViews must match the width and height of the coordinator.
+- Unexpected results can occur if views which don't implement the VertigoView interface are added to a SimpleVertigoCoordinator.
+- VertigoViews are responsible for remembering their own state. Each VertigoView must reliably return the last state declared to `onStateChanged(State)` when `getCurrentState()` is called.
+- SimpleVertigoCoordinators cannot be resized after coordination begins.
+- Additional views can be registered with a SimpleViewCoordinator after coordination has begun, so long as the new view has the correct state when added.
+
+## License
+This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
+
+## Dependencies and Attribution
+This library uses the following open source libraries as level 1 dependencies:
+- [Android Support Library](https://developer.android.com/topic/libraries/support-library/index.html), licensed under the Apache 2.0 license.
+- [Android Utilities](https://github.com/MatthewTamlin/AndroidUtilities), licensed under the Apache 2.0 license.
+- [Java Utilities](https://github.com/MatthewTamlin/JavaUtilities), licensed under the Apache 2.0 license.
+- [Timber](https://github.com/JakeWharton/timber), licensed under the Apache 2.0 license.
+
+## Compatibility
 This library is compatible with Android 12 and up.
