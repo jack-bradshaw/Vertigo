@@ -33,6 +33,8 @@ In step 5 when the `makeViewActive(String)` method is called, one of three event
 
 Step 3 is important because the states of the contained views (either active or inactive) are used by the coordinator when deciding which views to move. A view must only be declared active if it is both in the up position and in front of all other views in the coordinator.
 
+For further details, read the Javadoc and have a look at [the example](example/src/main/java/com/matthewtamlin/vertigo/example).
+
 ## Important notes:
 - VertigoViews must match the width and height of the coordinator.
 - Unexpected results can occur if views which don't implement the VertigoView interface are added to a SimpleVertigoCoordinator.
