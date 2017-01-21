@@ -1,4 +1,4 @@
-#Vertigo
+# Vertigo
 Vertigo is an Android library for creating layouts where the views slide up and down over each other. For example:
 
 <div style="text-align:center"><img src="https://raw.githubusercontent.com/MatthewTamlin/Vertigo/master/artwork/example.gif" width="425"/></div>
@@ -6,7 +6,7 @@ Vertigo is an Android library for creating layouts where the views slide up and 
 ## Download
 Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:vertigo:1.0.0’` to your gradle build file to use the latest version. Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/Vertigo).
 
-##Usage 
+## Usage 
 There are two key interfaces in this library:
 - `VertigoView` is a View which can be coordinated by a VertigoView.
 - `VertigoCoordinator` contains multiple VertigoViews and coordinates their position.
@@ -36,12 +36,12 @@ In step 5 when the `makeViewActive(String)` method is called, one of three scena
 - If the target view is in the up position and hidden behind another view, all other views in the up position are slid down to reveal the target view. Callbacks are delivered to the target view and the views which were slid down.
 - If the the target view is in the down position, it is slid up. A callback is delivered to the target view and the view which was previously displayed.
 
-##Important notes:
+## Important notes:
 - VertigoViews must match the width and height of the coordinator.
 - Unexpected results can occur if views which don't implement the VertigoView interface are added to a SimpleVertigoCoordinator.
 - VertigoViews are responsible for remembering their own state. Each VertigoView must reliabley return the last state delcared to `onStateChanged(State)` when `getCurrentState()` is called.
 - SimpleVertigoCoordinators cannot be resized after coordination begins.
 - Additional views can be registered with a SimpleViewCoordinator after coordination has begun, so long as the view has the correct state when added.
 
-##Compatibility
+## Compatibility
 This library is compatible with Android 12 and up.
