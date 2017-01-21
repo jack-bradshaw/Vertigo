@@ -99,4 +99,4 @@
 				android:textSize="30sp"/>
 		</com.matthewtamlin.vertigo.library.VertigoFrameLayout>
 	</com.matthewtamlin.vertigo.library.SimpleVertigoCoordinator>
-</LinearLayout> 
+</LinearLayout>
