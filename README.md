@@ -3,8 +3,23 @@ Vertigo is an Android library for creating layouts where the views slide vertica
 
 <div style="text-align:center"><img src="https://raw.githubusercontent.com/MatthewTamlin/Vertigo/master/artwork/example.gif" width="425"/></div>
 
-## Download
-Releases are made available through jCentre. Add `compile 'com.matthew-tamlin:vertigo:1.0.0’` to your gradle build file to use the latest version. Older versions are available in the [maven repo](https://bintray.com/matthewtamlin/maven/Vertigo).
+## Dependency
+To use the library, add the following to your gradle build file:
+```groovy
+repositories {
+	jcenter()
+}
+
+dependencies {
+	// For Android Gradle plugin 3.0.0+ projects:
+	implementation 'com.matthew-tamlin:vertigo:1.0.0'
+
+	// For older projects:
+	compile 'com.matthew-tamlin:vertigo:1.0.0'
+}
+```
+
+Older versions are available in [the Maven repo](https://bintray.com/matthewtamlin/maven/Vertigo).
 
 ## Usage 
 There are two key interfaces in this library:
@@ -44,13 +59,6 @@ For further details, read the Javadoc and have a look at [the example](example/s
 
 ## License
 This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
-
-## Dependencies and Attribution
-This library uses the following open source libraries as level 1 dependencies:
-- [Android Support Library](https://developer.android.com/topic/libraries/support-library/index.html), licensed under the Apache 2.0 license.
-- [Android Utilities](https://github.com/MatthewTamlin/AndroidUtilities), licensed under the Apache 2.0 license.
-- [Java Utilities](https://github.com/MatthewTamlin/JavaUtilities), licensed under the Apache 2.0 license.
-- [Timber](https://github.com/JakeWharton/timber), licensed under the Apache 2.0 license.
 
 ## Compatibility
 This library is compatible with Android 12 and up.
