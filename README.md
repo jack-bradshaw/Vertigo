@@ -53,8 +53,5 @@ For further details, read the Javadoc and have a look at [the example](example/s
 - SimpleVertigoCoordinators cannot be resized after coordination begins.
 - Additional views can be registered with a SimpleViewCoordinator after coordination has begun, so long as the new view has the correct state when added.
 
-## License
-This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
-
 ## Compatibility
 This library is compatible with Android 12 and up.
