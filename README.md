@@ -7,11 +7,11 @@ Vertigo is an Android library for creating layouts where the views slide vertica
 To use the library, add the following to your gradle build file:
 ```groovy
 repositories {
-	jcenter()
+  jcenter()
 }
 
 dependencies {
-	implementation 'com.matthew-tamlin:vertigo:1.0.0'
+  implementation 'com.matthew-tamlin:vertigo:1.0.0'
 }
 ```
 
@@ -52,9 +52,6 @@ For further details, read the Javadoc and have a look at [the example](example/s
 - VertigoViews are responsible for remembering their own state. Each VertigoView must reliably return the last state declared to `onStateChanged(State)` when `getCurrentState()` is called.
 - SimpleVertigoCoordinators cannot be resized after coordination begins.
 - Additional views can be registered with a SimpleViewCoordinator after coordination has begun, so long as the new view has the correct state when added.
-
-## License
-This library is licensed under the Apache v2.0 licence. Have a look at [the license](LICENSE) for details.
 
 ## Compatibility
 This library is compatible with Android 12 and up.
