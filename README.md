@@ -3,6 +3,8 @@ Vertigo is an Android library for creating layouts where the views slide vertica
 
 <div style="text-align:center"><img src="https://raw.githubusercontent.com/MatthewTamlin/Vertigo/master/artwork/example.gif" width="425"/></div>
 
+**SUPPORT NOTICE: This library is now STABLE. It is no longer under active development, however pull requests from others are still being accepted.**
+
 ## Dependency
 To use the library, add the following to your gradle build file:
 ```groovy
